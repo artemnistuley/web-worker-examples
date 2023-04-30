@@ -1,6 +1,11 @@
-if (window.Worker) {
-  const myWorker = new Worker('worker.js');
-  myWorker.postMessage('');
-} else {
-  console.log('Worker is not supported');
+const workers = [];
+
+for (let i = 0; i < navigator.hardwareConcurrency; i++) {
+  const newWorker = {
+    worker: new Worker('cpu-worker.js'),
+    inUse: false,
+  }
+  workers.push(newWorker);
 }
+
+console.log({ workers });
